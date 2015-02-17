@@ -1,5 +1,4 @@
-
-# """
+"""
 Unittests for django-template-i18n-lint.
 """
 import unittest
