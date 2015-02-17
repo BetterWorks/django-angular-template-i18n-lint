@@ -85,6 +85,7 @@ GOOD_STRINGS = re.compile(
 
          # Angular translated text
          # {{"text"|translate}} or {[{'About'|translate}]} or <div translate>value</div>
+         |\{\[\{\s*".+?"\|translate\s*?}]}
          |\{\[\{\s*'.+?'\|translate\s*?}]}
 
          # all angular variables and functions
