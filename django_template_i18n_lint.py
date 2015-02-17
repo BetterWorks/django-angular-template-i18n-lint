@@ -5,7 +5,6 @@ Prints out all
 
 import os
 import re
-import sys
 from optparse import OptionParser
 
 
@@ -83,6 +82,13 @@ GOOD_STRINGS = re.compile(
 
          # any angular.js template
         |\[\[.*?\]\]
+
+         # Angular translated text
+         # {{"text"|translate}} or {[{'About'|translate}]} or <div translate>value</div>
+         |\{\[\{\s*'.+?'\|translate\s*?}]}
+
+         # all angular variables and functions
+         #|\{[{ }]}
 
          # HTML doctype
         |<!DOCTYPE.*?>
