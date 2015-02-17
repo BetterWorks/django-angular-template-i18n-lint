@@ -28,8 +28,14 @@ def location(str, pos):
 # Things that are OK:
 GOOD_STRINGS = re.compile(
     r"""
+
           # django comment
        ( {%\ comment\ %}.*?{%\ endcomment\ %}
+
+         # all data-? attributes
+         # all ng-... attributes
+         # all aa-... attributes
+        |<[^<>]*?(?:data-|ng-|aa-).+?[^<>]*?>
 
          # already translated text
         |{%\ ?blocktrans.*?{%\ ?endblocktrans\ ?%}
@@ -55,11 +61,11 @@ GOOD_STRINGS = re.compile(
          # Any html attribute that's not value or title (single quote, double quote and html5 quoteless)
          # NB at the start we want to grab any trailing quote from the previous attribute
          # FIXME This will fail for some quoteless attr values.
-        # jacek |(?:['"]\W+)?[a-z:-]+?(?<!alt)(?<!value)(?<!title)(?<!summary)=(?:'(?:{{.*?}}|{%.*?%}|[^']*)'|"(?:{{.*?}}|{%.*?%}|[^"]*)+"|[a-zA-Z\.]+)
+        |(?:['"]\W+)?[a-z:-]+?(?<!alt)(?<!value)(?<!title)(?<!summary)=(?:'(?:{{.*?}}|{%.*?%}|[^']*)'|"(?:{{.*?}}|{%.*?%}|[^"]*)+"|[a-zA-Z\.]+)
 
          # The actual alt/value/title tag itself cannot be translated, but the value should be
          # Treat data-title/data-original-title etc as equivalanets. Think this is some bootstrap thing & HTML5
-        # jacek |(?:['"]\W+)?(?:data-|data-original-)?(?:alt|value|title|summary)=['"]?
+        |(?:['"]\W+)?(?:data-|data-original-)?(?:alt|value|title|summary)=['"]?
 
          # Boolean attributes
         |<[^<>]+?(?:checked|selected|disabled|readonly|multiple|ismap|defer|async|declare|noresize|nowrap|noshade|compact|hidden|itemscope|autofocus|autoplay|controls|download)[^<>]*?>
@@ -68,19 +74,6 @@ GOOD_STRINGS = re.compile(
          # Angular translated text
          # <div translate>value</div> - FIXME
          #|\{\[\{\s*(?:".+?"|'.+?')\|translate\s*?}]}
-
-         # all angular variables and functions including |translate modifier
-        |\{\[\{.+?}]}
-
-         # all data-? attributes
-        |<[^<>]*?data-.+[^<>]*?>
-
-         # all ng-... attributes
-        |<[^<>]*?ng-.+[^<>]*?>
-
-         # all aa-... attributes
-        |<[^<>]*?aa-.+[^<>]*?>
-
 
          # HTML opening tag
         |<[\w:]+
@@ -97,6 +90,9 @@ GOOD_STRINGS = re.compile(
 
          # any django template tag
         |{%.*?%}
+
+         # all angular variables and functions including |translate modifier
+        |\{\[\{.+?}]}
 
          # any angular.js template
         |\[\[.*?\]\]
@@ -121,6 +117,7 @@ GOOD_STRINGS = re.compile(
 
          # another common template comment
         |{\#.*?\#}
+
         )""",
 
     # MULTILINE to match across lines and DOTALL to make . include the newline
