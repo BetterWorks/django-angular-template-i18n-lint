@@ -55,14 +55,32 @@ GOOD_STRINGS = re.compile(
          # Any html attribute that's not value or title (single quote, double quote and html5 quoteless)
          # NB at the start we want to grab any trailing quote from the previous attribute
          # FIXME This will fail for some quoteless attr values.
-        |(?:['"]\W+)?[a-z:-]+?(?<!alt)(?<!value)(?<!title)(?<!summary)=(?:'(?:{{.*?}}|{%.*?%}|[^']*)'|"(?:{{.*?}}|{%.*?%}|[^"]*)+"|[a-zA-Z\.]+)
+        # jacek |(?:['"]\W+)?[a-z:-]+?(?<!alt)(?<!value)(?<!title)(?<!summary)=(?:'(?:{{.*?}}|{%.*?%}|[^']*)'|"(?:{{.*?}}|{%.*?%}|[^"]*)+"|[a-zA-Z\.]+)
 
          # The actual alt/value/title tag itself cannot be translated, but the value should be
          # Treat data-title/data-original-title etc as equivalanets. Think this is some bootstrap thing & HTML5
-        |(?:['"]\W+)?(?:data-|data-original-)?(?:alt|value|title|summary)=['"]?
+        # jacek |(?:['"]\W+)?(?:data-|data-original-)?(?:alt|value|title|summary)=['"]?
 
          # Boolean attributes
         |<[^<>]+?(?:checked|selected|disabled|readonly|multiple|ismap|defer|async|declare|noresize|nowrap|noshade|compact|hidden|itemscope|autofocus|autoplay|controls|download)[^<>]*?>
+
+
+         # Angular translated text
+         # <div translate>value</div> - FIXME
+         #|\{\[\{\s*(?:".+?"|'.+?')\|translate\s*?}]}
+
+         # all angular variables and functions including |translate modifier
+        |\{\[\{.+?}]}
+
+         # all data-? attributes
+        |<[^<>]*?data-.+[^<>]*?>
+
+         # all ng-... attributes
+        |<[^<>]*?ng-.+[^<>]*?>
+
+         # all aa-... attributes
+        |<[^<>]*?aa-.+[^<>]*?>
+
 
          # HTML opening tag
         |<[\w:]+
@@ -82,14 +100,6 @@ GOOD_STRINGS = re.compile(
 
          # any angular.js template
         |\[\[.*?\]\]
-
-         # Angular translated text
-         # {{"text"|translate}} or {[{'About'|translate}]} or <div translate>value</div>
-         |\{\[\{\s*".+?"\|translate\s*?}]}
-         |\{\[\{\s*'.+?'\|translate\s*?}]}
-
-         # all angular variables and functions
-         #|\{[{ }]}
 
          # HTML doctype
         |<!DOCTYPE.*?>
