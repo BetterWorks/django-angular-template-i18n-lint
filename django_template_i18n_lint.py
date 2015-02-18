@@ -32,11 +32,6 @@ GOOD_STRINGS = re.compile(
           # django comment
        ( {%\ comment\ %}.*?{%\ endcomment\ %}
 
-         # all data-? attributes
-         # all ng-... attributes
-         # all aa-... attributes
-        |<[^<>]*?(?:data-|ng-|aa-).+?[^<>]*?>
-
          # already translated text
         |{%\ ?blocktrans.*?{%\ ?endblocktrans\ ?%}
 
@@ -70,6 +65,10 @@ GOOD_STRINGS = re.compile(
          # Boolean attributes
         |<[^<>]+?(?:checked|selected|disabled|readonly|multiple|ismap|defer|async|declare|noresize|nowrap|noshade|compact|hidden|itemscope|autofocus|autoplay|controls|download)[^<>]*?>
 
+         # all data-? attributes
+         # all ng-... attributes
+         # all aa-... attributes
+        |<[^<>]*?(?:data-|ng-|aa-).+?[^<>]*?>
 
          # Angular translated text
          # <div translate>value</div> - FIXME
@@ -128,10 +127,10 @@ LETTERS = re.compile(r"[^\W\d_]")
 
 LEADING_TRAILING_WHITESPACE = re.compile("(^\W+|\W+$)")
 
+
 def split_into_good_and_bad(template):
     for index, match in enumerate(GOOD_STRINGS.split(template)):
         yield (index, match)
-
 
 
 def split_trailing_space(string):
@@ -151,7 +150,6 @@ def split_trailing_space(string):
         return (results[1], results[2], results[3])
     else:
         raise NotImplementedError("Unknown case: %r %r" % (string, results))
-
 
 
 def replace_strings(filename, overwrite=False, force=False, accept=[]):
@@ -176,22 +174,22 @@ def replace_strings(filename, overwrite=False, force=False, accept=[]):
                 full_text_lines.append(leading_whitespace)
 
                 # Find location of first letter
-                lineno, charpos = location(template, offset+m.span()[0])
+                lineno, charpos = location(template, offset + m.span()[0])
 
                 if any(r.match(message) for r in accept):
                     full_text_lines.append(message)
                 elif lineno in ignore_lines:
                     full_text_lines.append(message)
                 elif force:
-                    full_text_lines.append('{% trans "'+message.replace('"', '\\"')+'" %}')
-                    
+                    full_text_lines.append('{% trans "' + message.replace('"', '\\"') + '" %}')
+
                 else:
-                    change = raw_input("Make %r translatable? [Y/n] " % message)                
+                    change = raw_input("Make %r translatable? [Y/n] " % message)
                     if change == 'y' or change == "":
-                        full_text_lines.append('{% trans "'+message.replace('"', '\\"')+'" %}')
+                        full_text_lines.append('{% trans "' + message.replace('"', '\\"') + '" %}')
                     else:
                         full_text_lines.append(message)
-                        
+
                 full_text_lines.append(trailing_whitespace)
         offset += len(string)
 
@@ -228,7 +226,7 @@ def non_translated_text(template):
             m = LETTERS.search(match)
             if m:
                 # Get location of first letter
-                lineno, charpos = location(template, offset+m.span()[0])
+                lineno, charpos = location(template, offset + m.span()[0])
                 if lineno in ignore_lines:
                     offset += len(match)
                     continue
@@ -252,9 +250,10 @@ def filenames_to_work_on(directory, exclude_filenames):
     """Return list of files in directory that we should look at"""
     files = []
     for dirpath, dirs, filenames in os.walk(directory):
-        files.extend(os.path.join(dirpath, fname)
-                        for fname in filenames
-                        if (fname.endswith('.html') or fname.endswith('.txt')) and fname not in exclude_filenames)
+        files.extend(
+            os.path.join(dirpath, fname)
+            for fname in filenames
+            if (fname.endswith('.html') or fname.endswith('.txt')) and fname not in exclude_filenames)
     return files
 
 
@@ -263,7 +262,9 @@ def main():
     parser.add_option("-r", "--replace", action="store_true", dest="replace",
                       help="Ask to replace the strings in the file.", default=False)
     parser.add_option("-o", "--overwrite", action="store_true", dest="overwrite",
-                      help="When replacing the strings, overwrite the original file.  If not specified, the file will be saved in a seperate file named X_translated.html", default=False)
+                      help="When replacing the strings, overwrite the original file. \
+                      If not specified, the file will be saved in a seperate file named X_translated.html",
+                      default=False)
     parser.add_option("-f", "--force", action="store_true", dest="force",
                       help="Force to replace string with no questions", default=False)
     parser.add_option("-e", "--exclude", action="append", dest="exclude_filename",
