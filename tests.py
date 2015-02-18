@@ -46,7 +46,7 @@ class DjangoTemplateI18nLintTestCase(unittest.TestCase):
 
     testNotrans1 = _known_good_output("Foo {# notrans #}", [])
     testNotrans2 = _known_good_output('{% block %}\nFoo {# notrans #}\n{% endblock %}">', [])
-    
+
     testIssue17a = _known_good_output("<input type=\"submit\" value=\"Confirm\" class=\"btn btn-danger\" />", [(1, 29, 'Confirm')])
     testIssue17b = _known_good_output('<li><a href="https://twitter.com/localunews" class="icon-twitter" rel="tooltip" title="" data-placement="top" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>', [(1, 132, 'Twitter')])
 
@@ -59,6 +59,16 @@ class DjangoTemplateI18nLintTestCase(unittest.TestCase):
     testAlt5 = _known_good_output('<img src=\'foo.jpg\' alt="Photo">', [(1, 25, 'Photo')])
     testAlt6 = _known_good_output("<img src=foo.jpg alt=Photo>", [(1, 22, 'Photo')])
     testAlt7 = _known_good_output("<img alt=Photo>", [(1, 10, 'Photo')])
+
+    # arabella added tests
+    testAngularTranslations1 = _known_good_output("{[{ 'some text'|translate }]}", [])
+    testAngularTranslations2 = _known_good_output("{[{'some text'|translate}]}", [])
+    testAngularTranslations3 = _known_good_output("{[{'some text' | translate}]}", [])
+    testAngularTranslations4 = _known_good_output("<div translate>SomeText</div>", [])
+    testAngularTranslations5 = _known_good_output("<div>SomeText</div>", [(1, 6, 'SomeText')])
+
+    testArabellaDirective = _known_good_output("<div aa-collapsable>SomeText</div>", [(1, 21, 'SomeText')])
+
 
 if __name__ == '__main__':
     unittest.main()
