@@ -30,7 +30,8 @@ GOOD_STRINGS = re.compile(
     r"""
 
           # django comment
-       ( {%\ comment\ %}.*?{%\ endcomment\ %}
+       ( 
+        {%\ comment\ %}.*?{%\ endcomment\ %}
 
          # already translated text
         |{%\ ?blocktrans.*?{%\ ?endblocktrans\ ?%}
@@ -65,10 +66,9 @@ GOOD_STRINGS = re.compile(
          # Boolean attributes
         |<[^<>]+?(?:checked|selected|disabled|readonly|multiple|ismap|defer|async|declare|noresize|nowrap|noshade|compact|hidden|itemscope|autofocus|autoplay|controls|download)[^<>]*?>
 
-         # all data-? attributes
          # all ng-... attributes
          # all aa-... attributes
-        |<[^<>]*?(?:data-|ng-|aa-).+?[^<>]*?>
+        |<[^<>]*?(?:ng-|aa-).+?[^<>]*?>
 
          # Angular translated text
          # <div translate>value</div> - FIXME
@@ -94,7 +94,7 @@ GOOD_STRINGS = re.compile(
         |\{\[\{.+?}]}
 
          # any angular.js template
-        |\[\[.*?\]\]
+        |\[\[.*?]]
 
          # HTML doctype
         |<!DOCTYPE.*?>
@@ -111,11 +111,11 @@ GOOD_STRINGS = re.compile(
         # HTML entities
         |&\#x[0-9]{1,10};
 
-         # CSS style
-        |<style.*?</style>
-
          # another common template comment
         |{\#.*?\#}
+
+         # any data-xxx attribute. Has to be last, otherwise fails with other comparisons
+        |data-(?:[a-z-_]*)
 
         )""",
 
@@ -221,8 +221,6 @@ def non_translated_text(template):
     # taken from http://www.technomancy.org/python/strings-that-dont-match-regex/
     for index, match in split_into_good_and_bad(template):
         if index % 2 == 0:
-
-            # Ignore it if it doesn't have letters
             m = LETTERS.search(match)
             if m:
                 # Get location of first letter
