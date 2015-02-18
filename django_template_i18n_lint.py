@@ -71,8 +71,8 @@ GOOD_STRINGS = re.compile(
         |<[^<>]*?(?:ng-|aa-).+?[^<>]*?>
 
          # Angular translated text
-         # <div translate>value</div> - FIXME
-         #|\{\[\{\s*(?:".+?"|'.+?')\|translate\s*?}]}
+         # <div translate>value</div>
+        |<[^<>]*?.*(?:translate).*?[^<>]*?>.*?</.*?>
 
          # HTML opening tag
         |<[\w:]+
