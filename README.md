@@ -1,7 +1,7 @@
 Django Template i18n lint
 =========================
 
-[![Build Status](https://travis-ci.org/rory/django-template-i18n-lint.png?branch=master)](https://travis-ci.org/rory/django-template-i18n-lint)
+[![Build Status](https://travis-ci.org/ArabellaTech/django-template-i18n-lint.svg?branch=master)](https://travis-ci.org/ArabellaTech/django-template-i18n-lint.svg)
 [![Coverage Status](https://coveralls.io/repos/rory/django-template-i18n-lint/badge.png?branch=master)](https://coveralls.io/r/rory/django-template-i18n-lint?branch=master)
 [![PyPI version](https://pypip.in/v/django-template-i18n-lint/badge.png)](https://pypi.python.org/pypi/django-template-i18n-lint)
 [![PyPI Downloads](https://pypip.in/d/django-template-i18n-lint/badge.png)](https://pypi.python.org/pypi/django-template-i18n-lint)

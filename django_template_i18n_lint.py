@@ -30,7 +30,7 @@ GOOD_STRINGS = re.compile(
     r"""
 
           # django comment
-       ( 
+        (
         {%\ comment\ %}.*?{%\ endcomment\ %}
 
          # already translated text
