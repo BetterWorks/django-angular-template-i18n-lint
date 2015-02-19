@@ -27,5 +27,11 @@ Program docs are available:
 
     $ python django_template_i18n_lint --h
 
+
+Known issues
+============
+`<div translate><span></span><i class='x'></i>SomeText</div>` will fail due to html tags inside. Required is to use
+ `<span translate>value</span>` or `{[{ 'x'|translate}]}` 
+
 Code is copyright Rory McCann 2013 and ArabellaTech 2015, and dual licenced under the GNU GPL version3 (or at your option a later version), and the BSD licence. See the files LICENCE.GPLv3 and LICENCE.BSD for more information
 

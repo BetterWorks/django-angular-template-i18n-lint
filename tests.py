@@ -66,15 +66,24 @@ class DjangoTemplateI18nLintTestCase(unittest.TestCase):
     testAngularTranslations3 = _known_good_output("{[{'some text' | translate}]}", [])
     testAngularTranslations4 = _known_good_output("<div translate>SomeText</div>", [])
     testAngularTranslations5 = _known_good_output("<div>SomeText</div>", [(1, 6, 'SomeText')])
-    testAngularTranslations6 = _known_good_output("<div translate><span></span><i class='x'></i>SomeText</div>", [])
-    testAngularTranslations7 = _known_good_output("""
+    testAngularTranslations6 = _known_good_output("<div translate><span></span><i class='x'></i>SomeText</div>",
+                                                  [(1, 46, 'SomeText')])
+    testAngularTranslations7 = _known_good_output(
+        "<div><span></span><i class='x'></i>{[{ 'SomeText'|translate}]}</div>", [])
+
+    testAngularTranslations8 = _known_good_output("""
             <p class="notify_msg full" ng-if="::showSessionFullCopy" translate>
                 Session Full
             </p>
         """, [])
 
-    testArabellaDirective = _known_good_output("<div aa-collapsable>SomeText</div>", [(1, 21, 'SomeText')])
+    testArabellaDirective1 = _known_good_output("<div aa-collapsable>SomeText</div>", [(1, 21, 'SomeText')])
+    testArabellaDirective2 = _known_good_output("""
+        <aa-input aa-errors="errors" aa-input-model="user.height_in" aa-input-name="height_in" aa-input-field="accountFormFields.height_in" aa-extratext='in' aa-li-extra-class="columns small-6" aa-fieldwrap="extra_fieldwrap"></aa-input>
+        """, [])
 
+    testDataAttribute1 = _known_good_output('<data-aa-collapsable title="{% trans "Your Account" %}" expanded="true">',
+                                            [])
 
 if __name__ == '__main__':
     unittest.main()

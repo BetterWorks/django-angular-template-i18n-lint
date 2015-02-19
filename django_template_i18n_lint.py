@@ -68,11 +68,12 @@ GOOD_STRINGS = re.compile(
 
          # Angular translated text
          # <div translate>value</div>
-        |(?:translate)[^<>]*?>.*(?=\</)
+        |(?:translate)[^<>]*?>.*?(?=\</)
 
          # all ng-... attributes
          # all aa-... attributes
-        |(?:[<[^<>]{2}]|["']\s|\s)(?:ng-|aa-).*?(?:['"].*?['"]|>|\ )
+         # all data-... attributes
+        |\<?(?:data-|ng-|aa-)[^>]+?(?:['"].*?['"]|>|\ )
 
          # HTML opening tag
         |<[\w:]+
@@ -113,9 +114,6 @@ GOOD_STRINGS = re.compile(
 
          # another common template comment
         |{\#.*?\#}
-
-         # any data-xxx attribute. Has to be last, otherwise fails with other comparisons
-        |data-(?:[a-z-_]*)
 
         )""",
 
