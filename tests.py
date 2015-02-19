@@ -66,7 +66,12 @@ class DjangoTemplateI18nLintTestCase(unittest.TestCase):
     testAngularTranslations3 = _known_good_output("{[{'some text' | translate}]}", [])
     testAngularTranslations4 = _known_good_output("<div translate>SomeText</div>", [])
     testAngularTranslations5 = _known_good_output("<div>SomeText</div>", [(1, 6, 'SomeText')])
-    testAngularTranslations4 = _known_good_output("<div translate><span></span><i class='x'></i>SomeText</div>", [])
+    testAngularTranslations6 = _known_good_output("<div translate><span></span><i class='x'></i>SomeText</div>", [])
+    testAngularTranslations7 = _known_good_output("""
+            <p class="notify_msg full" ng-if="::showSessionFullCopy" translate>
+                Session Full
+            </p>
+        """, [])
 
     testArabellaDirective = _known_good_output("<div aa-collapsable>SomeText</div>", [(1, 21, 'SomeText')])
 

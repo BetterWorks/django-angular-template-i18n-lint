@@ -66,13 +66,13 @@ GOOD_STRINGS = re.compile(
          # Boolean attributes
         |<[^<>]+?(?:checked|selected|disabled|readonly|multiple|ismap|defer|async|declare|noresize|nowrap|noshade|compact|hidden|itemscope|autofocus|autoplay|controls|download)[^<>]*?>
 
-         # all ng-... attributes
-         # all aa-... attributes
-        |<[^<>]*?(?:ng-|aa-).+?[^<>]*?>
-
          # Angular translated text
          # <div translate>value</div>
-        |<[^<>]*?.*(?:translate).*?[^<>]*?>.*</.*?>
+        |(?:translate)[^<>]*?>.*(?=\</)
+
+         # all ng-... attributes
+         # all aa-... attributes
+        |(?:[<[^<>]{2}]|["']\s|\s)(?:ng-|aa-).*?(?:['"].*?['"]|>|\ )
 
          # HTML opening tag
         |<[\w:]+
