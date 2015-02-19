@@ -72,7 +72,7 @@ GOOD_STRINGS = re.compile(
 
          # Angular translated text
          # <div translate>value</div>
-        |<[^<>]*?.*(?:translate).*?[^<>]*?>.*?</.*?>
+        |<[^<>]*?.*(?:translate).*?[^<>]*?>.*</.*?>
 
          # HTML opening tag
         |<[\w:]+

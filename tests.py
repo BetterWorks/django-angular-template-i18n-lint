@@ -31,8 +31,8 @@ class DjangoTemplateI18nLintTestCase(unittest.TestCase):
     testDjangoCustomTag = _known_good_output("{% load foo %}", [])
     testJS = _known_good_output("Foo<script>alert('Foo');</script>Bar", [(1, 1, 'Foo'), (1, 34, 'Bar')])
     testDjangoVar = _known_good_output("Foo{{ bar }}Baz", [(1, 1, 'Foo'), (1, 13, 'Baz')])
-    testBooleanValuesOK1 = _known_good_output("<option selected>Option</option>",[(1, 18, 'Option')])
-    testBooleanValuesOK2 = _known_good_output("<img src='my.jpg' ismap />",[])
+    testBooleanValuesOK1 = _known_good_output("<option selected>Option</option>", [(1, 18, 'Option')])
+    testBooleanValuesOK2 = _known_good_output("<img src='my.jpg' ismap />", [])
 
     testNoHTMLAttrSingleQuote = _known_good_output("<form method='POST'>FOO</form>", [(1, 21, 'FOO')])
     testNoHTMLAttrDoubleQuote = _known_good_output("<form method=\"POST\">FOO</form>", [(1, 21, 'FOO')])
@@ -66,6 +66,7 @@ class DjangoTemplateI18nLintTestCase(unittest.TestCase):
     testAngularTranslations3 = _known_good_output("{[{'some text' | translate}]}", [])
     testAngularTranslations4 = _known_good_output("<div translate>SomeText</div>", [])
     testAngularTranslations5 = _known_good_output("<div>SomeText</div>", [(1, 6, 'SomeText')])
+    testAngularTranslations4 = _known_good_output("<div translate><span></span><i class='x'></i>SomeText</div>", [])
 
     testArabellaDirective = _known_good_output("<div aa-collapsable>SomeText</div>", [(1, 21, 'SomeText')])
 
