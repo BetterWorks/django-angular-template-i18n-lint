@@ -8,7 +8,7 @@ Django Template i18n lint
 
 Fork of original project by Rory McCann, [https://github.com/rory/django-template-i18n-lint](https://github.com/rory/django-template-i18n-lint), description by original author: [Lint tool to find non-i18n strings in a django template](http://www.technomancy.org/python/django-template-i18n-lint/)
 
-A simple script to find non-i18n text in a Django template, including:
+A simple script to find non-i18n text in a Django and angular templates, including:
 
 * native Django translation 
 
