@@ -64,7 +64,7 @@ GOOD_STRINGS = re.compile(
         |(?:['"]\W+)?(?:data-|data-original-)?(?:alt|value|title|summary)=['"]?
 
          # Boolean attributes
-        |<[^<>]+?(?:checked|selected|disabled|readonly|multiple|ismap|defer|async|declare|noresize|nowrap|noshade|compact|hidden|itemscope|autofocus|autoplay|controls|download)[^<>]*?>
+        |<[^<>]+?(?:checked|selected|disabled|readonly|multiple|ismap|defer|async|declare|noresize|nowrap|noshade|compact|hidden|itemscope|autofocus|autoplay|controls|download|novalidate)[^<>]*?>
 
          # Angular translated text
          # <div translate>value</div>

@@ -49,6 +49,7 @@ class DjangoTemplateI18nLintTestCase(unittest.TestCase):
 
     testIssue17a = _known_good_output("<input type=\"submit\" value=\"Confirm\" class=\"btn btn-danger\" />", [(1, 29, 'Confirm')])
     testIssue17b = _known_good_output('<li><a href="https://twitter.com/localunews" class="icon-twitter" rel="tooltip" title="" data-placement="top" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>', [(1, 132, 'Twitter')])
+    testIssue17c = _known_good_output('<form name="form" novalidate data-ng-submit="update(goal)">', [])
 
     testAngularTemplate = _known_good_output('Foo [[yoyo]] bar', [(1, 1, 'Foo'), (1, 14, 'bar')])
 

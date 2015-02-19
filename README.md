@@ -30,8 +30,11 @@ Program docs are available:
 
 Known issues
 ============
-`<div translate><span></span><i class='x'></i>SomeText</div>` will fail due to html tags inside. Required is to use
+
+* `<div translate><span></span><i class='x'></i>SomeText</div>` will fail due to html tags inside. Required is to use
  `<span translate>value</span>` or `{[{ 'x'|translate}]}` 
+
+* in some situations it will be preferable to use `{[{ 'x'|translate}]}` instead of `<tag translate>`, in example when tag has `data-` or `aa-` or `ng-` attribute
 
 Code is copyright Rory McCann 2013 and ArabellaTech 2015, and dual licenced under the GNU GPL version3 (or at your option a later version), and the BSD licence. See the files LICENCE.GPLv3 and LICENCE.BSD for more information
 
