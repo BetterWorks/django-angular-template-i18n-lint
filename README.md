@@ -10,8 +10,16 @@ Fork of original project by Rory McCann, [https://github.com/rory/django-templat
 
 A simple script to find non-i18n text in a Django template, including:
 
-* native Djnago translation {% trans 'x' %} and {% blocktrans %}
-* angular translations using {[{ 'xx'|translate }]} and <p translate></p>
+* native Django translation 
+
+    {% trans 'x' %} 
+    {% blocktrans %}
+
+* angular translations using 
+    
+    {[{ 'xx'|translate }]} 
+    <p translate>paragraph</p>
+
 * supports a lot of custom angular directives, especially used by ArabellaTech (name starts with aa-)
 
 Usage:
