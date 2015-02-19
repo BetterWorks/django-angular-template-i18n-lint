@@ -68,7 +68,7 @@ GOOD_STRINGS = re.compile(
 
          # Angular translated text
          # <div translate>value</div>
-        |(?:translate)[^<>]*?>.*?(?=\</)
+        |(?:translate)[^<>]*?>.*?(?=\<)
 
          # all ng-... attributes
          # all aa-... attributes
