@@ -3,14 +3,14 @@
 from setuptools import setup
 
 setup(
-    name="django-template-i18n-lint",
-    version="1.2.0",
-    author="Rory McCann",
-    author_email="rory@technomancy.org",
-    py_modules=['django_template_i18n_lint'],
+    name="django-angular-template-i18n-lint",
+    version="0.1",
+    author="Arabel.la",
+    author_email="jacek@arabel.la",
+    py_modules=['django_angular_template_i18n_lint'],
     license='GPLv3+',
-    url='http://www.technomancy.org/python/django-template-i18n-lint/',
-    description='Lint tool to find non-trans/blocktrans text in django templates',
+    url='',
+    description='Lint tool to find non-trans/blocktrans/|translate text in django/angular templates',
     test_suite='tests',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
@@ -28,7 +28,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'django-template-i18n-lint = django_template_i18n_lint:main',
+            'django-angular-template-i18n-lint = django_angular_template_i18n_lint:main',
         ]
     },
 )
