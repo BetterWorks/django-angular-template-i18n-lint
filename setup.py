@@ -9,7 +9,7 @@ setup(
     author_email="jacek@arabel.la",
     py_modules=['django_angular_template_i18n_lint'],
     license='GPLv3+',
-    url='',
+    url='https://github.com/ArabellaTech/django-angular-template-i18n-lint/',
     description='Lint tool to find non-trans/blocktrans/|translate text in django/angular templates',
     test_suite='tests',
     classifiers=[
