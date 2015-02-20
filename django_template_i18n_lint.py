@@ -204,7 +204,7 @@ def filenames_to_work_on(directory, exclude_filenames):
 
 
 def main():
-    parser = OptionParser(usage="usage: %prog [options] <filenames/directory>")
+    parser = OptionParser(usage="usage: %prog [options] <filenames/directory>  Hint: {# notrans #} will prevent that line from showing in results.")
     parser.add_option("-e", "--exclude", action="append", dest="exclude_filename",
                       help="Exclude these filenames from being linted", default=[])
     parser.add_option("-x", "--accept", action="append", dest="accept",
