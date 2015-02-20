@@ -2,12 +2,12 @@
 Unittests for django-template-i18n-lint.
 """
 import unittest
-import django_template_i18n_lint
+import django_angular_template_i18n_lint
 
 
 def _known_good_output(input_string, expected_output):
     def test(self):
-        actual_output = list(django_template_i18n_lint.non_translated_text(input_string))
+        actual_output = list(django_angular_template_i18n_lint.non_translated_text(input_string))
         self.assertEqual(actual_output, expected_output)
     test.__doc__ = "Input string {0} should give output of {1}".format(
         repr(input_string[:30]), repr(expected_output)[:30])
