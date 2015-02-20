@@ -17,6 +17,7 @@ A simple script to find non-i18n text in a Django and angular templates, includi
 * supports a lot of custom angular directives, especially used by ArabellaTech (name starts with aa-)
 
 Usage:
+======
 
     $ python django_template_i18n_lint.py templates > not_translated.txt
 
@@ -27,6 +28,11 @@ Program docs are available:
 
     $ python django_template_i18n_lint --h
 
+
+Usefull hints:
+==============
+
+Putting `{# notrans #}` at the begining of line will prevent that line from showin in the results.
 
 Known issues
 ============

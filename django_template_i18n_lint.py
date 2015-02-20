@@ -150,56 +150,6 @@ def split_trailing_space(string):
         raise NotImplementedError("Unknown case: %r %r" % (string, results))
 
 
-def replace_strings(filename, overwrite=False, force=False, accept=[]):
-    full_text_lines = []
-    with open(filename) as fp:
-        content = fp.read()
-
-    offset = 0
-    ignore_lines = find_ignored_lines(content)
-
-    for index, string in split_into_good_and_bad(content):
-        if index % 2 == 1:
-            full_text_lines.append(string)
-        elif index % 2 == 0:
-            # Ignore it if it doesn't have letters
-            m = LETTERS.search(string)
-            if not m:
-                full_text_lines.append(string)
-            else:
-                # split out the leading whitespace and trailing
-                leading_whitespace, message, trailing_whitespace = split_trailing_space(string)
-                full_text_lines.append(leading_whitespace)
-
-                # Find location of first letter
-                lineno, charpos = location(template, offset + m.span()[0])
-
-                if any(r.match(message) for r in accept):
-                    full_text_lines.append(message)
-                elif lineno in ignore_lines:
-                    full_text_lines.append(message)
-                elif force:
-                    full_text_lines.append('{% trans "' + message.replace('"', '\\"') + '" %}')
-
-                else:
-                    change = raw_input("Make %r translatable? [Y/n] " % message)
-                    if change == 'y' or change == "":
-                        full_text_lines.append('{% trans "' + message.replace('"', '\\"') + '" %}')
-                    else:
-                        full_text_lines.append(message)
-
-                full_text_lines.append(trailing_whitespace)
-        offset += len(string)
-
-    full_text = "".join(full_text_lines)
-    if overwrite:
-        save_filename = filename
-    else:
-        save_filename = filename.split(".")[0] + "_translated.html"
-    open(save_filename, 'w').write(full_text)
-    print("Fully translated! Saved as: %s" % save_filename)
-
-
 def find_ignored_lines(template):
     lines = set()
     for m in re.finditer(r'{#\s*notrans\s*#}', template):
@@ -254,15 +204,7 @@ def filenames_to_work_on(directory, exclude_filenames):
 
 
 def main():
-    parser = OptionParser(usage="usage: %prog [options] <filenames>")
-    parser.add_option("-r", "--replace", action="store_true", dest="replace",
-                      help="Ask to replace the strings in the file.", default=False)
-    parser.add_option("-o", "--overwrite", action="store_true", dest="overwrite",
-                      help="When replacing the strings, overwrite the original file. \
-                      If not specified, the file will be saved in a seperate file named X_translated.html",
-                      default=False)
-    parser.add_option("-f", "--force", action="store_true", dest="force",
-                      help="Force to replace string with no questions", default=False)
+    parser = OptionParser(usage="usage: %prog [options] <filenames/directory>")
     parser.add_option("-e", "--exclude", action="append", dest="exclude_filename",
                       help="Exclude these filenames from being linted", default=[])
     parser.add_option("-x", "--accept", action="append", dest="accept",
@@ -282,10 +224,7 @@ def main():
     accept_regexes = [re.compile(r) for r in options.accept]
 
     for filename in files:
-        if options.replace:
-            replace_strings(filename, overwrite=True, force=options.force, accept=accept_regexes)
-        else:
-            print_strings(filename, accept=accept_regexes)
+        print_strings(filename, accept=accept_regexes)
 
 if __name__ == '__main__':
     main()
