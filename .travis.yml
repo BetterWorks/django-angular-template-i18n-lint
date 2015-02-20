@@ -9,6 +9,6 @@ notifications:
         team@arabel.la
 # command to run tests
 script:
-  coverage run --source=django_template_i18n_lint setup.py test
+  coverage run --source=django_angular_template_i18n_lint setup.py test
 after_success:
   coveralls

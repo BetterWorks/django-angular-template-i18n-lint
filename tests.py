@@ -46,6 +46,8 @@ class DjangoTemplateI18nLintTestCase(unittest.TestCase):
 
     testNotrans1 = _known_good_output("Foo {# notrans #}", [])
     testNotrans2 = _known_good_output('{% block %}\nFoo {# notrans #}\n{% endblock %}">', [])
+    testNotrans1 = _known_good_output("Foo <!-- notrans -->", [])
+    testNotrans2 = _known_good_output('{% block %}\nFoo <!-- notrans -->\n{% endblock %}">', [])
 
     testIssue17a = _known_good_output("<input type=\"submit\" value=\"Confirm\" class=\"btn btn-danger\" />", [(1, 29, 'Confirm')])
     testIssue17b = _known_good_output('<li><a href="https://twitter.com/localunews" class="icon-twitter" rel="tooltip" title="" data-placement="top" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>', [(1, 132, 'Twitter')])
