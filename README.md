@@ -2,7 +2,6 @@ Django Angular Template i18n lint
 =========================
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ArabellaTech/django-angular-template-i18n-lint/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
 [![Build Status](https://travis-ci.org/ArabellaTech/django-angular-template-i18n-lint.svg?branch=master)](https://travis-ci.org/ArabellaTech/django-template-i18n-lint.svg)
 [![Coverage Status](https://coveralls.io/repos/ArabellaTech/django-angular-template-i18n-lint/badge.svg)](https://coveralls.io/r/ArabellaTech/django-template-i18n-lint)
 
