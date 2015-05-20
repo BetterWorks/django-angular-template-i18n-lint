@@ -42,3 +42,7 @@ Known issues
 
 Code is copyright Rory McCann 2013 and ArabellaTech 2015, and dual licenced under the GNU GPL version3 (or at your option a later version), and the BSD licence. See the files LICENCE.GPLv3 and LICENCE.BSD for more information
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ArabellaTech/django-angular-template-i18n-lint/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
