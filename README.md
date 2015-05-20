@@ -1,6 +1,8 @@
 Django Angular Template i18n lint
 =========================
 
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ArabellaTech/django-angular-template-i18n-lint/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
 [![Build Status](https://travis-ci.org/ArabellaTech/django-angular-template-i18n-lint.svg?branch=master)](https://travis-ci.org/ArabellaTech/django-template-i18n-lint.svg)
 [![Coverage Status](https://coveralls.io/repos/ArabellaTech/django-angular-template-i18n-lint/badge.svg)](https://coveralls.io/r/ArabellaTech/django-template-i18n-lint)
 
@@ -41,8 +43,4 @@ Known issues
 * in some situations it will be preferable to use `{[{ 'x'|translate}]}` instead of `<tag translate>`, in example when tag has `data-` or `aa-` or `ng-` attribute
 
 Code is copyright Rory McCann 2013 and ArabellaTech 2015, and dual licenced under the GNU GPL version3 (or at your option a later version), and the BSD licence. See the files LICENCE.GPLv3 and LICENCE.BSD for more information
-
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ArabellaTech/django-angular-template-i18n-lint/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
