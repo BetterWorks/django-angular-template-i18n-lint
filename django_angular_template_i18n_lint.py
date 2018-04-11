@@ -210,7 +210,7 @@ def main():
     parser.add_option("-x", "--accept", action="append", dest="accept",
                       help="Exclude these regexes from results", default=[])
     (options, args) = parser.parse_args()
-
+    rc = 0
     # Create a list of files to check
     if len(args) == 0:
         args = [os.getcwd()]
@@ -222,9 +222,11 @@ def main():
             files.append(arg)
 
     accept_regexes = [re.compile(r) for r in options.accept]
-
+    if files:
+        rc = 1
     for filename in files:
         print_strings(filename, accept=accept_regexes)
-
+    
+    return rc
 if __name__ == '__main__':
     main()
