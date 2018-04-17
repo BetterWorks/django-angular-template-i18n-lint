@@ -73,7 +73,7 @@ GOOD_STRINGS = re.compile(
          # all ng-... attributes
          # all aa-... attributes
          # all data-... attributes
-        |\<?(?:data-|ng-|aa-)[^>]+?(?:['"].*?['"]|>|\ )
+        |\<?(?:data-|ng-)[^>]+?(?:['"].*?['"]|>|\ )
 
          # HTML opening tag
         |<[\w:]+
@@ -152,7 +152,7 @@ def split_trailing_space(string):
 
 def find_ignored_lines(template):
     lines = set()
-    for m in re.finditer(r'({#\s*notrans\s*#}|<!--\s*notrans\s*-->|#\s*notrans\s*)', template):
+    for m in re.finditer(r'({#\s*notrans\s*#}|<!--\s*notrans\s*-->)', template):
         offset = m.span()[0]
         lineno, charpos = location(template, offset)
         lines.add(lineno)
@@ -226,7 +226,7 @@ def main():
         rc = 1
     for filename in files:
         print_strings(filename, accept=accept_regexes)
-    
+
     return rc
 if __name__ == '__main__':
     main()

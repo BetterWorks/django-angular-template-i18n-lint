@@ -13,14 +13,12 @@ A simple script to find non-i18n text in a Django and angular templates, includi
 
 * angular translations using `{[{ 'xx'|translate }]}` and `<p translate>paragraph</p>`
 
-* supports a lot of custom angular directives, especially used by ArabellaTech (name starts with aa-)
-
 Usage:
 ======
 
     $ python django_angular_template_i18n_lint.py templates > not_translated.txt
 
-saves all untranslated strings into given file. The original option to wrap in translation blocks was removed, due to 
+saves all untranslated strings into given file. The original option to wrap in translation blocks was removed, due to
 support of many translation options (i.e. angular).
 
 Program docs are available:
@@ -37,9 +35,7 @@ Known issues
 ============
 
 * `<div translate><span></span><i class='x'></i>SomeText</div>` will fail due to html tags inside. Required is to use
- `<span translate>value</span>` or `{[{ 'x'|translate}]}` 
+ `<span translate>value</span>` or `{[{ 'x'|translate}]}`
 
 * in some situations it will be preferable to use `{[{ 'x'|translate}]}` instead of `<tag translate>`, in example when tag has `data-` or `aa-` or `ng-` attribute
-
-Code is copyright Rory McCann 2013 and ArabellaTech 2015, and dual licenced under the GNU GPL version3 (or at your option a later version), and the BSD licence. See the files LICENCE.GPLv3 and LICENCE.BSD for more information
 
