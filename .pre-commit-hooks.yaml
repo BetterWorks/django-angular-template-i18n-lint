@@ -3,4 +3,4 @@
   description: Find untranslated strings on files
   entry: django-angular-template-i18n-lint
   language: python
-  types: [python, html, coffee]
+  types: [html]
