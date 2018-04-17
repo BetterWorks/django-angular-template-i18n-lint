@@ -152,7 +152,7 @@ def split_trailing_space(string):
 
 def find_ignored_lines(template):
     lines = set()
-    for m in re.finditer(r'({#\s*notrans\s*#}|<!--\s*notrans\s*-->)', template):
+    for m in re.finditer(r'({#\s*notrans\s*#}|<!--\s*notrans\s*-->|#\s*notrans\s*)', template):
         offset = m.span()[0]
         lineno, charpos = location(template, offset)
         lines.add(lineno)
