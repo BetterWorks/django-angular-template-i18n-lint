@@ -225,7 +225,6 @@ def main():
     for filename in files:
         print_strings(filename, accept=accept_regexes)
 
-    print rc
     return rc
 if __name__ == '__main__':
     main()
