@@ -188,8 +188,8 @@ def print_strings(filename, accept=[]):
     for lineno, charpos, message in non_translated_text(file_contents):
         if any(r.match(message) for r in accept):
             continue
-
         print("%s:%s:%s:%s" % (filename, lineno, charpos, message))
+        rc = 1
 
 
 def filenames_to_work_on(directory, exclude_filenames):
@@ -210,7 +210,7 @@ def main():
     parser.add_option("-x", "--accept", action="append", dest="accept",
                       help="Exclude these regexes from results", default=[])
     (options, args) = parser.parse_args()
-    rc = 0
+    rc = 0 # returns if there is an error
     # Create a list of files to check
     if len(args) == 0:
         args = [os.getcwd()]
@@ -222,11 +222,10 @@ def main():
             files.append(arg)
 
     accept_regexes = [re.compile(r) for r in options.accept]
-    if files:
-        rc = 1
     for filename in files:
         print_strings(filename, accept=accept_regexes)
 
+    print rc
     return rc
 if __name__ == '__main__':
     main()
